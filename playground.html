@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using the Web Stack</title>
+    <style>
+        /* it's always best to use external css */
+        /* tag styles */
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        p {
+            /* #rrggbbaa or #rgb or a color name */
+            color: #336699;
+            text-align: center;
+        }
+
+        /* class styles: manually apply as many times as you like */
+        .highlight {
+            background-color: yellow;
+        }
+        .myHiddenClass {display: none;}
+        /* id styles: manually apply ONCE (each is unique) */
+        #title {
+            font-style: italic;
+        }
+        /* #btnAgree {display: block;} */
+
+        /* other styles: combine styles together */
+        table tr th {
+            text-align: left;
+            background-color: thistle;
+        }
+
+        /* the chevron '>' means 'is a direct descendent of...' */
+        ol>li {
+            list-style: lower-alpha;
+            font-size: 80%;
+        }
+
+        /* the space ' ' means 'is a descendent of (not need to be direct)' */
+        li li {
+            font-size: 100%;
+        }
+        /* comma is useful to declare a bunch of styles */
+        ol, ul, dl {list-style-position: inherit;}
+    </style>
+</head>
+
+<body>
+    <article>
+        <header></header>
+        <nav></nav>
+        <section>
+            <aside>
+                <h1 id='title'>h1 to h6</h1>
+                <p>this is a <span class="highlight">paragraph</span></p>
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <tr>
+                        <td>Apples</td>
+                        <td>100</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Pears</td>
+                        <td>200</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>Oranges</td>
+                        <td>300</td>
+                        <td>30</td>
+                    </tr>
+                </table>
+            </aside>
+            <aside>
+                <ol>
+                    <li>first
+                        <ol>
+                            <span>
+                                <li>sub X</li>
+                                <li>sub Y</li>
+                                <li>sub Z</li>
+                            </span>
+                        </ol>
+                    </li>
+                    <li>Second</li>
+                    <li>Third</li>
+                </ol>
+            </aside>
+        </section>
+        <footer>
+            <button id='btnAgree'>I agree to cookies</button>
+        </footer>
+    </article>
+</body>
+<!-- ECMAScript really should be in a separate file -->
+<script>
+    const agreeCookies = ()=>{ // this is the preferred ES way to declare client-side functions
+        // we should remove event listeners
+        event.target.removeEventListener('click', agreeCookies)
+        // make the button disappear
+        btnAgree.setAttribute('class', 'myHiddenClass')
+    }
+    btnAgree.addEventListener('click', agreeCookies)
+</script>
+
+</html>

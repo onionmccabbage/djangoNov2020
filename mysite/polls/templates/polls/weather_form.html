@@ -10,39 +10,39 @@
 <form action='{% url "polls:weather_form" weather.id %}' method="POST">
     {% csrf_token %}
     Country: {{weather.country}}
-    <!-- <select name='country' id='country'>
-                <option selected value='{{weather.country}}'>{{weather.country}}</option>
-                <option value='uk'>United Kingdom</option>
-                <option value='ie'>Ireland</option>
-                <option value='aus'>Australia</option>
-                <option value='usa'>USA</option>
-            </select> -->
+    <select name='country' id='country'>
+        <option selected value='{{weather.country}}'>{{weather.country}}</option>
+        <option value='uk'>United Kingdom</option>
+        <option value='ie'>Ireland</option>
+        <option value='aus'>Australia</option>
+        <option value='usa'>USA</option>
+    </select>
     <br />
     City: {{weather.city}}
-    <!-- <input type="text" placeholder="enter city name" required id='city' name='city' value="{{weather.city}}" /> -->
+    <input type="text" placeholder="enter city name" required id='city' name='city' value="{{weather.city}}" />
     <br />
     Description: {{weather.description}}
-    <!-- <textarea id='description' name='description'>{{weather.description}}</textarea> -->
+    <textarea id='description' name='description'>{{weather.description}}</textarea>
     <br />
     Temperature: {{weather.temperature}}
-    <!-- <input type="text" size='6' value='{{weather.temperature}}' name='temperature' id='temperature' /> -->
+    <input type="text" size='6' value='{{weather.temperature}}' name='temperature' id='temperature' />
     &deg; Celcius
     <br />
     Wind Speed: {{weather.wind_speed}}
-    <!-- <input type="text" id='wind_speed' name='wind_speed' value='{{weather.wind_speed}}' placeholder="wind speed"/> -->
+    <input type="range" id='wind_speed' name='wind_speed' value='{{weather.wind_speed}}' placeholder="wind speed" />
     Wind Direction: {{weather.wind_direction}}
-    <!-- <input type="number" id='wind_direction' name='wind_direction' value="{{weather.wind_direction}}"
-                min="0" max="360" placeholder="wind direction" /> -->
+    <input type="number" id='wind_direction' name='wind_direction' value="{{weather.wind_direction}}" min="0" max="360"
+        placeholder="wind direction" />
     <!-- a hidden field to make sure we pass the ID for this weather report -->
     <input type='hidden' value='{{weather.id}}' id='id' name='id' />
     <br />
-    <!-- <input type='submit' value='save changes' /> -->
+    <input type='submit' value='save changes' />
 </form>
-<!-- <hr />
-        <section>
-            <button id='btnWeather'>Get Weather</button>
-        </section>
-        <hr /> -->
+<hr />
+<section>
+    <button id='btnWeather'>Get Weather</button>
+</section>
+<hr />
 {% endblock %}
 <script>
     let weatherStub = 'http://api.openweathermap.org/data/2.5/weather?q='
