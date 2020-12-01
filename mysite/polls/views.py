@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic # these are generic view classes we can extend
 
-from .models import Choice, Question
+from .models import Choice, Question, Weather
 
 # declare class-based views
 class IndexView(generic.ListView): # by convention call is NnnnView
@@ -44,3 +44,30 @@ class ChildView(generic.ListView):
     context_object_name = 'latest_question_list'
     def get_queryset(self):
         return Question.objects.order_by('-pub_date')[:10]
+
+def weather(request):
+    weather_list = Weather.objects.order_by('city') 
+    context = {'weather_list': weather_list}
+    return render(request, 'polls/weather.html', context)
+
+def weather_form(request, weather_id):
+    # is it GET or POST?
+    if request.method =='POST':
+        # the form has been submitted, so save the changes and then show the 'weather' view
+        selected_weather = get_object_or_404(Weather, pk=request.POST['id'])
+        selected_weather.country = request.POST['country']
+        selected_weather.city = request.POST['city']
+        selected_weather.description = request.POST['description']
+        selected_weather.temperature = request.POST['temperature']
+        selected_weather.wind_speed = request.POST['wind_speed']
+        selected_weather.wind_direction = request.POST['wind_direction']
+        selected_weather.save()
+        weather_list = Weather.objects.order_by('city') 
+        context = {'weather_list': weather_list}
+        return render(request, 'polls/weather.html', context)
+    else:
+        # for form has NOT yet been submitted - just show the weather_form view
+        weather = get_object_or_404(Weather, pk=weather_id)
+        context = {'weather':weather}
+        return render(request, 'polls/weather_form.html', context)
+

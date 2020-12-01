@@ -1,0 +1,76 @@
+{% extends 'polls/base.html' %}
+
+{% block content_block %}
+<h3>Weather for {{weather.city}}</h3>
+{% if error_message %}
+<aside>
+    <p><strong>{{ error_message}}</strong></p>
+</aside>
+{% endif %}
+<form action='{% url "polls:weather_form" weather.id %}' method="POST">
+    {% csrf_token %}
+    Country: {{weather.country}}
+    <!-- <select name='country' id='country'>
+                <option selected value='{{weather.country}}'>{{weather.country}}</option>
+                <option value='uk'>United Kingdom</option>
+                <option value='ie'>Ireland</option>
+                <option value='aus'>Australia</option>
+                <option value='usa'>USA</option>
+            </select> -->
+    <br />
+    City: {{weather.city}}
+    <!-- <input type="text" placeholder="enter city name" required id='city' name='city' value="{{weather.city}}" /> -->
+    <br />
+    Description: {{weather.description}}
+    <!-- <textarea id='description' name='description'>{{weather.description}}</textarea> -->
+    <br />
+    Temperature: {{weather.temperature}}
+    <!-- <input type="text" size='6' value='{{weather.temperature}}' name='temperature' id='temperature' /> -->
+    &deg; Celcius
+    <br />
+    Wind Speed: {{weather.wind_speed}}
+    <!-- <input type="text" id='wind_speed' name='wind_speed' value='{{weather.wind_speed}}' placeholder="wind speed"/> -->
+    Wind Direction: {{weather.wind_direction}}
+    <!-- <input type="number" id='wind_direction' name='wind_direction' value="{{weather.wind_direction}}"
+                min="0" max="360" placeholder="wind direction" /> -->
+    <!-- a hidden field to make sure we pass the ID for this weather report -->
+    <input type='hidden' value='{{weather.id}}' id='id' name='id' />
+    <br />
+    <!-- <input type='submit' value='save changes' /> -->
+</form>
+<!-- <hr />
+        <section>
+            <button id='btnWeather'>Get Weather</button>
+        </section>
+        <hr /> -->
+{% endblock %}
+<script>
+    let weatherStub = 'http://api.openweathermap.org/data/2.5/weather?q='
+    let weatherAPPID = '&APPID=48f2d5e18b0d2bc50519b58cce6409f1'
+    let units = '&units=metric'
+    let btnWeather = document.getElementById('btnWeather')
+
+    const getWeather = () => {
+        let chosen_city = document.getElementById('city').value
+        let chosen_country = document.getElementById('country').value
+        let temperature = document.getElementById('temperature')
+        let description = document.getElementById('description')
+        let speed = document.getElementById('wind_speed')
+        let direction = document.getElementById('wind_direction')
+        let weatherURL = `${weatherStub}${chosen_city},${chosen_country}${weatherAPPID}${units}`
+        console.log(weatherURL)
+        // make API call
+        fetch(weatherURL)
+            .then((request) => { return request.json() })
+            .then((data) => {
+                console.log(data)
+                // put the retrieved valus into the form
+                temperature.value = data.main.temp
+                description.value = data.weather[0]['description']
+                speed.value = data.wind['speed']
+                direction.value = data.wind['deg']
+            })
+    }
+    btnWeather.addEventListener('click', getWeather)
+
+</script>

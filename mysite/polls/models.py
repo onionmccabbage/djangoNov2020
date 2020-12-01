@@ -19,3 +19,14 @@ class Choice(models.Model):
     votes       = models.IntegerField(default=0)
     def __str__(self): # override built in __str__ for nice printing
         return self.choice_text
+
+class Weather(models.Model):
+    city = models.CharField(max_length=200)
+    country = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    temperature = models.FloatField(default=22)
+    wind_speed = models.FloatField(default=0)
+    wind_direction = models.IntegerField(default=0)
+    def __str__(self):
+        report_str = "{}: {} {} {} {}".format(self.city, self.description, self.temperature, self.wind_speed, self.wind_direction)
+        return report_str

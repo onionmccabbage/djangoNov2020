@@ -10,5 +10,8 @@ urlpatterns = [ # this is a list
     path('<int:pk>/', views.DetailView.as_view(), name='detail'), # pk for the primary key
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     path('<int:question_id>/vote/', views.vote, name='vote'), # NB vote has no template
-    path('/child/', views.ChildView.as_view(), name='child'),
+    path('child/', views.ChildView.as_view(), name='child'),
+    # review 'weather'
+    path('weather/', views.weather, name='weather'),
+    path('<int:weather_id>/weather_form/', views.weather_form, name='weather_form'),
 ]

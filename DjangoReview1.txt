@@ -1,0 +1,34 @@
+Django Review Exercise 1 https://pastebin.com/D4sKTw22
+======================== until about 2:50
+Open 'polls/models.py' and declare a model for 'weather'
+This should include 'city', 'country' and 'description' as character fields
+Also include 'temperature' as a FloatField (with a sensible default value)
+Write a new __str__ method for this data model, which returns the city, description and temperature
+
+Make migrations and migrate
+
+Open 'polls/admin.py' and import your Weather model
+Register your Weather model with the admin site (exactly as for 'Question' and 'Choice')
+
+Open the admin site and add several weather reports
+(Notice that new 'Weather' instances use your __str__ in the Admin interface)
+
+Open 'polls/views.py' and declare a view called 'weather' 
+Write a weather template descended from 'base.html'
+Return some content for this view from the weather model (e.g. list the weather instances)
+Open 'polls/urls.py' and add a path 'weather/' which leads to this new view
+Check your view content gets rendered in the browser when you navigate to 127.0.0.1:8000/polls/weather/
+
+Optional
+========
+Add more data members to the weather model e.g. wind speed and direction etc.
+Create a weather_detail page which shows details for a selected weather member
+Link the weather list to the weather detail, passing a context dictionary
+Remember the 'temperature' field should be type='number'
+(NB this is NOT as complex as the 'votes' system)
+
+
+
+
+
+
