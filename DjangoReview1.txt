@@ -1,5 +1,7 @@
 Django Review Exercise 1 https://pastebin.com/D4sKTw22
 ======================== until about 2:50
+IDEA- this could be a new app, since it has no relationship to the polls app
+
 Open 'polls/models.py' and declare a model for 'weather'
 This should include 'city', 'country' and 'description' as character fields
 Also include 'temperature' as a FloatField (with a sensible default value)

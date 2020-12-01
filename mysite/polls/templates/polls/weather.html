@@ -6,61 +6,13 @@
 <ul>
     {% for weather in weather_list %}
     <li><a href="{% url 'polls:weather_form' weather.id %}">
-            <span class='city'>City: {{ weather.city }} </span>
-            <span class='country'>({{weather.country}}) </span>
-            <span class='temp'>Temperature: {{weather.temperature}}&deg;</span>
-            <span class='speed'>Wind Speed: {{weather.wind_speed}}</span>
-            <span class='dir'>Wind Direction: {{weather.wind_direction}}&deg;</span>
+            <span class='city'>{{ weather.city }} </span>
+            <span class='desc'>({{weather.description}}) </span>
+ 
         </a></li>
     {% endfor %}
 </ul>
 {% else %}
 <h3 class='highlight'>There are no weather reports yet</h3>
 {% endif  %}
-<!-- <section>
-    Category:
-    <select id='cat'>
-        <option>posts</option>
-        <option>users</option>
-        <option>albums</option>
-        <option>photos</option>
-        <option>todos</option>
-    </select>
-    <br />
-    ID Number:
-    <input type="number" min="1" max="9" step="1" id='num' value='1' />
-    <br />
-    <button id='btnGo'>Go</button>
-    <hr />
-    <aside id='monitor'></aside>
-    <hr />
-</section> -->
 {% endblock %}
-<script>
-    // a function to get API end-point data
-    const getData = () => {
-        // retrieve the user values
-        document.getElementById('cat')
-        document.getElementById('num')
-        let chosen_cat = cat.value
-        let chosen_num = num.value
-
-        // we can access end-point data via REST APIs
-        // the modern way is to use the FETCH API
-        // try posts/n or albums/n etc. (users, totos)
-        fetch(`http://jsonplaceholder.typicode.com/${chosen_cat}/${chosen_num}`) // an asynchronous request
-            .then((response) => { return response.json() }) // make sure it's json
-            .then((data) => {
-                // console.log(data)
-                monitor = document.getElementById('monitor') // for ALL browsers
-                monitor.innerHTML = JSON.stringify(data)
-                // monitor.innerHTML = data.title
-            })
-    }
-
-    // add a listener to the button
-    let btnGo = document.getElementById('btnGo')
-    btnGo.addEventListener('click', getData) // NOT the call yet
-
-
-</script>
