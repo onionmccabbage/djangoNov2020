@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to our home page</title>
+
+    <!-- we can make use of static assets in Django -->
+    {% load static %}
+    <link rel='stylesheet' type="text/css" href='{% static "polls/bootstrap.min.css" %}' />
+    <link rel='stylesheet' type="text/css" href='{% static "polls/styles.css" %}' />
+</head>
+
+<body>
+    <article class='jumbotron'>
+
+        <h3>Polls App Home Page</h3>
+        {% if latest_question_list %}
+        <!-- this is interpolation - fill in using model values -->
+        <nav>
+            <ul>
+                <li>
+                    <a href='{% url "polls:child" %}'>inherited template</a>
+                </li>
+                {% for question in latest_question_list %}
+                <!-- <li><a href='/polls/{{question.id}}'>{{ question.question_text }}</a></li> -->
+                <li><a href='{% url "polls:detail" question.id %}'>{{ question.question_text }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        {% else %}
+        <p>No questions exist</p>
+        {% endif %}
+
+        <footer>
+            <pre>&copy;2020 read our legal notice</pre>
+        </footer>
+    </article>
+</body>
+
+</html>

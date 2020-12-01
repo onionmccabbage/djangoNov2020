@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title_block %}Default Title Goes Here{% endblock %}</title>
+    {% load static %}
+    <link rel='stylesheet' type="text/css" href='{% static "polls/bootstrap.min.css" %}' />
+    <link rel='stylesheet' type="text/css" href='{% static "polls/styles.css" %}' />
+</head>
+<body>
+    <article>
+        <header></header>
+        <nav>
+            {% block nav_block %}
+            <a href='https://djangoproject.com'>Django Docs</a> |
+            <a href='https://djangogirls.org'>Django Tutorials</a> |
+            <a href='https://www.w3schools.com/Css/'>CSS Tutorial</a>
+            {% endblock %}
+        </nav>
+        <section>
+            <!-- this is where page-specific content will go -->
+            {% block content_block %}
+
+            {% endblock %}
+        </section>
+        <footer>
+            <pre>&copy;2020 read our legal notice</pre>
+        </footer>
+    </article>
+</body>
+</html>

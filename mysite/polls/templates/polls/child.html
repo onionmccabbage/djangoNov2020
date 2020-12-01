@@ -1,0 +1,27 @@
+{% extends 'polls/base.html' %}
+
+<!-- override the title_block with custom content -->
+{% block title_block %}
+    This is a child page, descended from base template
+{% endblock %}
+
+{% block content_block %}
+    <h3>Template Inheritance</h3>
+    {% if latest_question_list %}
+        <!-- this is interpolation - fill in using model values -->
+        <nav>
+            <ul>
+                <li>
+                    <a href='{% url "polls:child" %}'>inherited template</a>
+                </li>
+                {% for question in latest_question_list %}
+                <!-- <li><a href='/polls/{{question.id}}'>{{ question.question_text }}</a></li> -->
+                <li><a href='{% url "polls:detail" question.id %}'>{{ question.question_text }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        {% else %}
+        <p>No questions exist</p>
+        {% endif %}
+{% endblock %}
