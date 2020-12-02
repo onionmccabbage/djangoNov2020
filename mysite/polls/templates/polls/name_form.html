@@ -1,8 +1,16 @@
 <!-- by default all browsers will validate - we can turn that off with novalidate -->
 <form action='' method="POST">
+    <!-- this can be used for multi-submit -->
     {%csrf_token%}
     <table>
         {{ name_form.as_table }}
     </table>
-    <input type="submit" value='Go' />
+    <input id='myBtn' type="submit" value='Go' />
 </form>
+<script>
+    const once_only=()=>{
+        // event.preventDefault() // let's not even submit the form yet!!!
+        event.target.setAttribute('disabled', 'true')
+    }
+    myBtn.addEventListener('click', once_only)
+</script>

@@ -23,6 +23,6 @@ from django.urls import reverse
 response = client.get(reverse('polls:index'))
 print(response.status_code) # expect 200
 print(response.content) # expect he web apge!!!
-print(response.context['latest_question_list']) # expeect the questions list here
+print(response.context['latest_question_list']) # expect the questions list here
 
 
