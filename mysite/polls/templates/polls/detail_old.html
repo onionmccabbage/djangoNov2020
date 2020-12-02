@@ -19,22 +19,17 @@
         {% endif %}
 
         <p>{{question.id}} {{question.pub_date}}</p>
-        
-        <form method="POST">
-            {%csrf_token%}
-            <table>
-                {{ detail_form.as_table }}
-            </table>
-            <button>Go</button>
-        </form>
-
+        <form action="{% url 'polls:vote' question.id %}" method='POST'>
+            <!-- we MUST provide security -->
+            {% csrf_token %}
             {% for choice in question.choice_set.all %}
                 <input type='radio' name='choice' id='choice{{forloop.counter}}'
                         value='{{choice.id}}' />
                 <label for='choice{{forloop.counter}}'> {{choice.choice_text}}  </label>
                 <br/>
             {% endfor %}
-
+            <button>Go</button>
+        </form>
     </section>
     </body>
 </html>

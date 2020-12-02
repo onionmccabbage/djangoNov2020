@@ -2,7 +2,7 @@ from django.test import TestCase
 import datetime
 from django.utils import timezone
 
-from .models import Question
+from .models import Question, Choice
 
 # Create your tests here.
 # test the Question class
@@ -27,6 +27,15 @@ class QuestionModelTests(TestCase):
         current_q = Question(pub_date=time)
         # assert
         self.assertIs(current_q.was_published_recently(), True) # it was published today!!
+
+    # test the Choice model
+    def test_choice(self):
+        ''' '''
+        current_choice = Choice(choice_text='this is a test choice')
+        # assert
+        self.assertIs(current_choice.choice_text, 'this is a test choice')
+        self.assertIs(current_choice.votes, 0)
+
 
 
 # to run tests

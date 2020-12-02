@@ -4,7 +4,8 @@ from django.urls import reverse
 from django.views import generic # these are generic view classes we can extend
 
 from .models import Choice, Question, Weather
-from .name_form import NameForm
+from .name_form import NameForm 
+from .detail_form import DetailForm
 
 
 # declare class-based views
@@ -15,9 +16,25 @@ class IndexView(generic.ListView): # by convention call is NnnnView
     def get_queryset(self):
         return Question.objects.order_by('-pub_date')[:10]
 
-class DetailView(generic.DetailView): # details of ONE model member
-    model = Question # the exact question will be derived from pk parameter
-    template_name = 'polls/detail.html' # default would be question_detail.html
+# class DetailView(generic.DetailView): # details of ONE model member
+#     model = Question # the exact question will be derived from pk parameter
+#     template_name = 'polls/detail.html' # default would be question_detail.html
+def detail(request, question_id=1):
+    if request.method == 'POST':
+        detail_form = DetailForm(request.POST)
+        if detail_form.is_valid():
+            pass
+            # subject = detail_form.cleaned_data['subject']
+            # message = detail_form.cleaned_data['message']
+            # sender = detail_form.cleaned_data['sender']
+            # cc_myself = detail_form.cleaned_data['cc_myself']
+            # return HttpResponse('Thank you for the data {} {} {} {}'.format(subject, message, sender, cc_myself) ) # we should send to another URL
+        else:
+            return HttpResponse('Errors!!')
+    else:
+        question = get_object_or_404( Question, pk=question_id )
+        detail_form = DetailForm()
+        return render(request, 'polls/detail.html', {'detail_form':detail_form}) #,'question': question_id})
 
 class ResultsView(generic.DetailView):
     model = Question
