@@ -43,7 +43,7 @@
     <button id='btnWeather'>Get Weather</button>
 </section>
 <hr />
-{% endblock %}
+
 <script>
     let weatherStub = 'http://api.openweathermap.org/data/2.5/weather?q='
     let weatherAPPID = '&APPID=48f2d5e18b0d2bc50519b58cce6409f1'
@@ -51,6 +51,7 @@
     let btnWeather = document.getElementById('btnWeather')
 
     const getWeather = () => {
+        console.log('getting weather')
         let chosen_city = document.getElementById('city').value
         let chosen_country = document.getElementById('country').value
         let temperature = document.getElementById('temperature')
@@ -72,5 +73,5 @@
             })
     }
     btnWeather.addEventListener('click', getWeather)
-
 </script>
+{% endblock %}
