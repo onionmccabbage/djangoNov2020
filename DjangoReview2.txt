@@ -1,16 +1,22 @@
-Django Review Exercise 2
+Django Review Exercise 2 see https://pastebin.com/qeEH8GJq
 ========================
+reference: see
+https://docs.djangoproject.com/en/3.1/ref/forms/
+https://docs.djangoproject.com/en/3.1/ref/forms/renderers/#overriding-built-in-widget-templates
+https://docs.djangoproject.com/en/3.1/topics/forms/modelforms/
+
 Write unit tests for the 'Choice' model
-This is a trivial model, so the tests will be prety basic, such as testing that an choice created during the test has the expected text, defaults to zero votes and is associated with a particular question
+This is a trivial model, so the tests will be prety basic, such as testing that an choice created during the test has the expected text, defaults to zero votes and is associated with a particular question (which you set in the test!!)
 You could also test the __str__ method of the Choice class 
 
 Make significant changes to 'detail.html' so it uses a Django form widget rather than a hard-coded <input /> tag
-To do this you will need to create a new .py module containing code and also alter the view.py file acordingly
+To do this you will need to create a new .py module containing code and also alter the view.py file accordingly
 
 Optional
 ========
 Add a field to the detail form for 'username' (no need to add this to the models)
 Include validation so the detail form (for voting) cannot be submitted until a 'username' has been provided (We are not persisting the username in this example)
 Write unit tests for your 'Weather' model
-Customize the Admin interfae to show your Weather model differently to the default
+Customize the Admin interface to show your Weather model differently to the default
 (i.e. choose banner headers, order etc.)
+
