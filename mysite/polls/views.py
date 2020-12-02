@@ -24,10 +24,6 @@ def detail(request, question_id=1):
         detail_form = DetailForm(request.POST)
         if detail_form.is_valid():
             pass
-            # subject = detail_form.cleaned_data['subject']
-            # message = detail_form.cleaned_data['message']
-            # sender = detail_form.cleaned_data['sender']
-            # cc_myself = detail_form.cleaned_data['cc_myself']
             # return HttpResponse('Thank you for the data {} {} {} {}'.format(subject, message, sender, cc_myself) ) # we should send to another URL
         else:
             return HttpResponse('Errors!!')

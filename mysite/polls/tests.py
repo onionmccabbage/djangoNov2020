@@ -33,10 +33,8 @@ class QuestionModelTests(TestCase):
         ''' '''
         current_choice = Choice(choice_text='this is a test choice')
         # assert
-        self.assertIs(current_choice.choice_text, 'this is a test choice')
+        self.assertEqual(current_choice.choice_text, 'this is a test choice')
         self.assertIs(current_choice.votes, 0)
-
-
 
 # to run tests
 # manage.py test polls
