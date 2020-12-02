@@ -14,4 +14,5 @@ urlpatterns = [ # this is a list
     # review 'weather'
     path('weather/', views.weather, name='weather'),
     path('<int:weather_id>/weather_form/', views.weather_form, name='weather_form'),
+    path('get_name/', views.get_name, name='get_name')
 ]

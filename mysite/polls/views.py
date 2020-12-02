@@ -1,9 +1,11 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic # these are generic view classes we can extend
 
 from .models import Choice, Question, Weather
+from .name_form import NameForm
+
 
 # declare class-based views
 class IndexView(generic.ListView): # by convention call is NnnnView
@@ -71,3 +73,23 @@ def weather_form(request, weather_id):
         context = {'weather':weather}
         return render(request, 'polls/weather_form.html', context)
 
+# here is a view which handles getting the user name from a form called NameForm
+def get_name(request):
+    if request.method == 'POST': # POST means the form has been submitted
+        # we can handle the sumbitted values in the form
+        name_form = NameForm(request.POST)
+        if name_form.is_valid():
+            # process the data
+            # DANGER -the data may contain user attacks
+            # so we must beware
+            subject = name_form.cleaned_data['subject'] # cleaned means validated!
+            message = name_form.cleaned_data['message']
+            sender = name_form.cleaned_data['sender']
+            cc_myself = name_form.cleaned_data['cc_myself']
+            return HttpResponse('Thank you for the data {} {} {} {}'.format(subject, message, sender, cc_myself) ) # we should send to another URL
+        else:
+            return HttpResponse('Errors!!')
+    else: # this is for GET - form has not been submitted
+        # just render the form
+        name_form = NameForm()
+        return render(request, 'polls/name_form.html', {'name_form':name_form})

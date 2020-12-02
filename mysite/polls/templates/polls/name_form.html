@@ -1,0 +1,8 @@
+<!-- by default all browsers will validate - we can turn that off with novalidate -->
+<form action='' method="POST">
+    {%csrf_token%}
+    <table>
+        {{ name_form.as_table }}
+    </table>
+    <input type="submit" value='Go' />
+</form>
